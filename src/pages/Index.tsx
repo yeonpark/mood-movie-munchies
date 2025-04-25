@@ -1,4 +1,6 @@
+
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { translations } from "../config/translations";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { useTrackButtonClick } from "../hooks/useTrackButtonClick";
@@ -7,9 +9,11 @@ const Index = () => {
   const [language, setLanguage] = useState("ko");
   const t = translations[language as keyof typeof translations];
   const { trackClick } = useTrackButtonClick();
+  const navigate = useNavigate();
 
   const handleCtaClick = () => {
     trackClick("cta", language);
+    navigate("/mood");
   };
 
   return (
