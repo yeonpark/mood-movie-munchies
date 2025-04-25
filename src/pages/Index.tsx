@@ -1,11 +1,16 @@
-
 import { useState } from "react";
 import { translations } from "../config/translations";
 import { LanguageSelector } from "../components/LanguageSelector";
+import { useTrackButtonClick } from "../hooks/useTrackButtonClick";
 
 const Index = () => {
   const [language, setLanguage] = useState("ko");
   const t = translations[language as keyof typeof translations];
+  const { trackClick } = useTrackButtonClick();
+
+  const handleCtaClick = () => {
+    trackClick("cta", language);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-purple-50">
@@ -41,7 +46,10 @@ const Index = () => {
             ))}
           </div>
 
-          <button className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors">
+          <button 
+            onClick={handleCtaClick}
+            className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors"
+          >
             {t.cta}
           </button>
         </div>
